@@ -69,14 +69,32 @@ extern int yydebug;
     SIN = 270,                     /* SIN  */
     COS = 271,                     /* COS  */
     TAN = 272,                     /* TAN  */
-    RAD = 273,                     /* RAD  */
-    DEG = 274,                     /* DEG  */
-    MOD = 275,                     /* MOD  */
-    ROUND = 276,                   /* ROUND  */
-    FLOOR = 277,                   /* FLOOR  */
-    CEIL = 278,                    /* CEIL  */
-    FACT = 279,                    /* FACT  */
-    UMINUS = 280                   /* UMINUS  */
+    CSC = 273,                     /* CSC  */
+    SEC = 274,                     /* SEC  */
+    COT = 275,                     /* COT  */
+    ASIN = 276,                    /* ASIN  */
+    ACOS = 277,                    /* ACOS  */
+    ATAN = 278,                    /* ATAN  */
+    ACSC = 279,                    /* ACSC  */
+    ASEC = 280,                    /* ASEC  */
+    ACOT = 281,                    /* ACOT  */
+    RAD = 282,                     /* RAD  */
+    DEG = 283,                     /* DEG  */
+    MOD = 284,                     /* MOD  */
+    ROUND = 285,                   /* ROUND  */
+    FLOOR = 286,                   /* FLOOR  */
+    CEIL = 287,                    /* CEIL  */
+    FACT = 288,                    /* FACT  */
+    ABS = 289,                     /* ABS  */
+    LOG = 290,                     /* LOG  */
+    LN = 291,                      /* LN  */
+    COMMA = 292,                   /* COMMA  */
+    MIN = 293,                     /* MIN  */
+    MAX = 294,                     /* MAX  */
+    RAND = 295,                    /* RAND  */
+    RANDINT = 296,                 /* RANDINT  */
+    ROOT = 297,                    /* ROOT  */
+    UMINUS = 298                   /* UMINUS  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -85,11 +103,11 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 39 "calc.y"
+#line 41 "calc.y"
 
     double val;
 
-#line 93 "calc.tab.h"
+#line 111 "calc.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
