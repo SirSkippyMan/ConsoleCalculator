@@ -67,12 +67,13 @@
 
 
 /* First part of user prologue.  */
-#line 25 "calc.y"
+#line 26 "calc.y"
 
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
     #include <math.h>
+    #include <time.h>
     #include "calc.tab.h"
 
     int yylex(void);
@@ -81,7 +82,7 @@
     int errFlag = 0; // Evaluation should not print if there are any errors present.
     int trigMode = 0; // 0 for radians, 1 for degrees
 
-#line 85 "calc.tab.c"
+#line 86 "calc.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -127,18 +128,39 @@ enum yysymbol_kind_t
   YYSYMBOL_SIN = 15,                       /* SIN  */
   YYSYMBOL_COS = 16,                       /* COS  */
   YYSYMBOL_TAN = 17,                       /* TAN  */
-  YYSYMBOL_RAD = 18,                       /* RAD  */
-  YYSYMBOL_DEG = 19,                       /* DEG  */
-  YYSYMBOL_MOD = 20,                       /* MOD  */
-  YYSYMBOL_ROUND = 21,                     /* ROUND  */
-  YYSYMBOL_FLOOR = 22,                     /* FLOOR  */
-  YYSYMBOL_CEIL = 23,                      /* CEIL  */
-  YYSYMBOL_FACT = 24,                      /* FACT  */
-  YYSYMBOL_UMINUS = 25,                    /* UMINUS  */
-  YYSYMBOL_YYACCEPT = 26,                  /* $accept  */
-  YYSYMBOL_input = 27,                     /* input  */
-  YYSYMBOL_line = 28,                      /* line  */
-  YYSYMBOL_expr = 29                       /* expr  */
+  YYSYMBOL_CSC = 18,                       /* CSC  */
+  YYSYMBOL_SEC = 19,                       /* SEC  */
+  YYSYMBOL_COT = 20,                       /* COT  */
+  YYSYMBOL_ASIN = 21,                      /* ASIN  */
+  YYSYMBOL_ACOS = 22,                      /* ACOS  */
+  YYSYMBOL_ATAN = 23,                      /* ATAN  */
+  YYSYMBOL_ACSC = 24,                      /* ACSC  */
+  YYSYMBOL_ASEC = 25,                      /* ASEC  */
+  YYSYMBOL_ACOT = 26,                      /* ACOT  */
+  YYSYMBOL_RAD = 27,                       /* RAD  */
+  YYSYMBOL_DEG = 28,                       /* DEG  */
+  YYSYMBOL_MOD = 29,                       /* MOD  */
+  YYSYMBOL_ROUND = 30,                     /* ROUND  */
+  YYSYMBOL_FLOOR = 31,                     /* FLOOR  */
+  YYSYMBOL_CEIL = 32,                      /* CEIL  */
+  YYSYMBOL_FACT = 33,                      /* FACT  */
+  YYSYMBOL_ABS = 34,                       /* ABS  */
+  YYSYMBOL_LOG = 35,                       /* LOG  */
+  YYSYMBOL_LN = 36,                        /* LN  */
+  YYSYMBOL_COMMA = 37,                     /* COMMA  */
+  YYSYMBOL_MIN = 38,                       /* MIN  */
+  YYSYMBOL_MAX = 39,                       /* MAX  */
+  YYSYMBOL_RAND = 40,                      /* RAND  */
+  YYSYMBOL_RANDINT = 41,                   /* RANDINT  */
+  YYSYMBOL_ROOT = 42,                      /* ROOT  */
+  YYSYMBOL_UMINUS = 43,                    /* UMINUS  */
+  YYSYMBOL_YYACCEPT = 44,                  /* $accept  */
+  YYSYMBOL_input = 45,                     /* input  */
+  YYSYMBOL_46_1 = 46,                      /* $@1  */
+  YYSYMBOL_line = 47,                      /* line  */
+  YYSYMBOL_expr = 48,                      /* expr  */
+  YYSYMBOL_minlist = 49,                   /* minlist  */
+  YYSYMBOL_maxlist = 50                    /* maxlist  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -255,7 +277,7 @@ typedef int yytype_uint16;
 
 
 /* Stored state numbers (used for stacks). */
-typedef yytype_int8 yy_state_t;
+typedef yytype_uint8 yy_state_t;
 
 /* State numbers in computations.  */
 typedef int yy_state_fast_t;
@@ -466,19 +488,19 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   223
+#define YYLAST   557
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  26
+#define YYNTOKENS  44
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  4
+#define YYNNTS  7
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  27
+#define YYNRULES  51
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  65
+#define YYNSTATES  151
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   280
+#define YYMAXUTOK   298
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -520,16 +542,20 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25
+      25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,    41,    42,    43
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_int16 yyrline[] =
 {
-       0,    74,    74,    74,    76,    81,    84,   130,   133,   136,
-     143,   145,   147,   149,   151,   158,   165,   167,   169,   171,
-     173,   180,   186,   192,   198,   200,   202,   204
+       0,    96,    96,    96,    96,   100,   106,   109,   127,   134,
+     137,   140,   145,   147,   149,   151,   153,   159,   165,   167,
+     169,   171,   173,   179,   185,   191,   197,   204,   211,   218,
+     224,   230,   232,   238,   244,   250,   252,   254,   256,   268,
+     274,   280,   286,   292,   294,   296,   303,   313,   323,   325,
+     329,   331
 };
 #endif
 
@@ -547,8 +573,11 @@ static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "NUM", "PLUS", "MINUS",
   "TIMES", "DIV", "EXP", "LBRACKET", "RBRACKET", "NEWLINE", "EXITCMD",
-  "HELPCMD", "SQRT", "SIN", "COS", "TAN", "RAD", "DEG", "MOD", "ROUND",
-  "FLOOR", "CEIL", "FACT", "UMINUS", "$accept", "input", "line", "expr", YY_NULLPTR
+  "HELPCMD", "SQRT", "SIN", "COS", "TAN", "CSC", "SEC", "COT", "ASIN",
+  "ACOS", "ATAN", "ACSC", "ASEC", "ACOT", "RAD", "DEG", "MOD", "ROUND",
+  "FLOOR", "CEIL", "FACT", "ABS", "LOG", "LN", "COMMA", "MIN", "MAX",
+  "RAND", "RANDINT", "ROOT", "UMINUS", "$accept", "input", "$@1", "line",
+  "expr", "minlist", "maxlist", YY_NULLPTR
 };
 
 static const char *
@@ -558,7 +587,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-15)
+#define YYPACT_NINF (-14)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -572,13 +601,22 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-     -15,    38,   -15,    -4,   -15,    59,    59,    59,    -2,     0,
-      -1,     3,     4,     5,     7,     8,     6,    11,    17,   -15,
-      79,   -15,   -14,   -14,    87,   -15,   -15,    59,    59,    59,
-      59,   -15,   -15,    59,    59,    59,    59,    59,    59,    59,
-      59,   -15,    59,   -15,   -15,   108,   115,   136,   143,   164,
-     171,   192,    -3,    -3,    80,    80,    80,   199,   -15,   -15,
-     -15,   -15,   -15,   -15,   -15
+     -14,    18,   -14,    70,     8,   -14,   132,   132,   132,    10,
+      12,    13,    15,    21,    22,    25,    28,    29,    67,    68,
+      69,    71,    72,    90,    14,    92,    98,   111,   112,   113,
+     114,   115,   116,   118,   119,   121,   130,   -14,     6,   -14,
+     -13,   -13,   109,   -14,   107,   -14,   132,   132,   132,   132,
+     132,   132,   132,   132,   132,   132,   132,   132,   132,   -14,
+     -14,   132,   132,   132,   132,   132,   132,   132,   132,   132,
+     132,   132,   132,   132,   132,   132,   132,   -14,   132,   -14,
+     -14,   -14,   186,   216,   223,   230,   260,   267,   274,   304,
+     311,   318,   348,   355,   362,   392,   399,   406,   436,    -1,
+     443,   524,    16,   524,    17,   171,   176,   181,   254,   254,
+       0,     0,     0,   524,   -14,   -14,   -14,   -14,   -14,   -14,
+     -14,   -14,   -14,   -14,   -14,   -14,   -14,   -14,   -14,   -14,
+     -14,   -14,   132,   -14,   -14,   132,   -14,   132,   132,   132,
+     132,   450,   524,   524,   480,   487,   494,   -14,   -14,   -14,
+     -14
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -586,111 +624,201 @@ static const yytype_int16 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       2,     0,     1,     0,    10,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     3,
-       0,     9,    18,    17,     0,     5,     6,     0,     0,     0,
-       0,     7,     8,     0,     0,     0,     0,     0,     0,     0,
-       0,     4,     0,    27,    19,     0,     0,     0,     0,     0,
-       0,     0,    11,    12,    13,    14,    16,    15,    20,    21,
-      22,    23,    24,    25,    26
+       2,     3,     1,     0,     0,    12,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     4,     0,    11,
+      20,    19,     0,     6,     0,     7,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     9,
+      10,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     5,     0,    38,
+      21,     8,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,    48,     0,    50,     0,     0,     0,     0,    13,    14,
+      15,    16,    18,    17,    22,    23,    24,    25,    27,    26,
+      28,    29,    30,    31,    33,    32,    34,    35,    36,    37,
+      39,    41,     0,    40,    43,     0,    44,     0,     0,     0,
+       0,     0,    49,    51,     0,     0,     0,    42,    45,    46,
+      47
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -15,   -15,   -15,    -5
+     -14,   -14,   -14,   -14,    -6,   -14,   -14
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     1,    19,    20
+       0,     1,     3,    37,    38,   102,   104
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
    positive, shift that token.  If negative, reduce the rule whose
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
-static const yytype_int8 yytable[] =
+static const yytype_uint8 yytable[] =
 {
-      22,    23,    24,    38,    39,    40,    42,    21,    27,    25,
-      43,    26,    28,    29,    30,    33,     0,    42,    31,    32,
-      34,    43,    45,    46,    47,    48,    35,     0,    49,    50,
-      51,    52,    53,    54,    55,    56,     0,    57,     2,     3,
-       0,     4,     5,     6,     0,     0,     0,     7,     0,     0,
-       8,     9,    10,    11,    12,    13,    14,    15,     0,    16,
-      17,    18,     4,     5,     6,     0,     0,     0,     7,     0,
-       0,     0,     0,    10,    11,    12,    13,     0,     0,     0,
-      16,    17,    18,    36,    37,    38,    39,    40,    40,     0,
-      41,    36,    37,    38,    39,    40,     0,    44,     0,    42,
-      42,     0,     0,    43,    43,     0,     0,    42,     0,     0,
-       0,    43,    36,    37,    38,    39,    40,     0,    58,    36,
-      37,    38,    39,    40,     0,    59,     0,     0,    42,     0,
-       0,     0,    43,     0,     0,    42,     0,     0,     0,    43,
-      36,    37,    38,    39,    40,     0,    60,    36,    37,    38,
-      39,    40,     0,    61,     0,     0,    42,     0,     0,     0,
-      43,     0,     0,    42,     0,     0,     0,    43,    36,    37,
-      38,    39,    40,     0,    62,    36,    37,    38,    39,    40,
-       0,    63,     0,     0,    42,     0,     0,     0,    43,     0,
-       0,    42,     0,     0,     0,    43,    36,    37,    38,    39,
-      40,     0,    64,    36,    37,    38,    39,    40,     0,     0,
-       0,     0,    42,     0,     0,     0,    43,     0,     0,    42,
-       0,     0,     0,    43
+      40,    41,    42,    72,    73,    74,    75,    76,    76,   131,
+      72,    73,    74,    75,    76,    44,    78,    77,     2,    39,
+      79,    43,    46,    45,    47,    59,   134,   136,    78,    78,
+      48,    49,    79,    79,    50,    78,   132,    51,    52,    79,
+      82,    83,    84,    85,    86,    87,    88,    89,    90,    91,
+      92,    93,    94,   135,   137,    95,    96,    97,    98,    99,
+     100,   101,   103,   105,   106,   107,   108,   109,   110,   111,
+     112,     4,   113,     5,     6,     7,    53,    54,    55,     8,
+      56,    57,     9,    10,    11,    12,    13,    14,    15,    16,
+      17,    18,    19,    20,    21,    22,    23,    24,    25,    58,
+      26,    27,    28,    60,    29,    30,    31,    61,    32,    33,
+      34,    35,    36,    72,    73,    74,    75,    76,    81,    80,
+      62,    63,    64,    65,    66,    67,   141,    68,    69,   142,
+      70,   143,   144,   145,   146,     5,     6,     7,    78,    71,
+       0,     8,    79,     0,     0,     0,    11,    12,    13,    14,
+      15,    16,    17,    18,    19,    20,    21,    22,    23,     0,
+       0,     0,    26,    27,    28,     0,    29,    30,    31,     0,
+      32,    33,    34,    35,    36,    72,    73,    74,    75,    76,
+      72,    73,    74,    75,    76,    72,    73,    74,    75,    76,
+      72,    73,    74,    75,    76,     0,   114,     0,     0,     0,
+      78,     0,     0,     0,    79,    78,     0,     0,   138,    79,
+      78,     0,     0,   139,    79,    78,     0,     0,   140,    79,
+      72,    73,    74,    75,    76,     0,   115,    72,    73,    74,
+      75,    76,     0,   116,    72,    73,    74,    75,    76,     0,
+     117,     0,     0,     0,     0,    78,     0,     0,     0,    79,
+       0,     0,    78,     0,     0,     0,    79,     0,     0,    78,
+      74,    75,    76,    79,    72,    73,    74,    75,    76,     0,
+     118,    72,    73,    74,    75,    76,     0,   119,    72,    73,
+      74,    75,    76,    78,   120,     0,     0,    79,     0,    78,
+       0,     0,     0,    79,     0,     0,    78,     0,     0,     0,
+      79,     0,     0,    78,     0,     0,     0,    79,    72,    73,
+      74,    75,    76,     0,   121,    72,    73,    74,    75,    76,
+       0,   122,    72,    73,    74,    75,    76,     0,   123,     0,
+       0,     0,     0,    78,     0,     0,     0,    79,     0,     0,
+      78,     0,     0,     0,    79,     0,     0,    78,     0,     0,
+       0,    79,    72,    73,    74,    75,    76,     0,   124,    72,
+      73,    74,    75,    76,     0,   125,    72,    73,    74,    75,
+      76,     0,   126,     0,     0,     0,     0,    78,     0,     0,
+       0,    79,     0,     0,    78,     0,     0,     0,    79,     0,
+       0,    78,     0,     0,     0,    79,    72,    73,    74,    75,
+      76,     0,   127,    72,    73,    74,    75,    76,     0,   128,
+      72,    73,    74,    75,    76,     0,   129,     0,     0,     0,
+       0,    78,     0,     0,     0,    79,     0,     0,    78,     0,
+       0,     0,    79,     0,     0,    78,     0,     0,     0,    79,
+      72,    73,    74,    75,    76,     0,   130,    72,    73,    74,
+      75,    76,     0,   133,    72,    73,    74,    75,    76,     0,
+     147,     0,     0,     0,     0,    78,     0,     0,     0,    79,
+       0,     0,    78,     0,     0,     0,    79,     0,     0,    78,
+       0,     0,     0,    79,    72,    73,    74,    75,    76,     0,
+     148,    72,    73,    74,    75,    76,     0,   149,    72,    73,
+      74,    75,    76,     0,   150,     0,     0,     0,     0,    78,
+       0,     0,     0,    79,     0,     0,    78,     0,     0,     0,
+      79,     0,     0,    78,     0,     0,     0,    79,    72,    73,
+      74,    75,    76,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,    78,     0,     0,     0,    79
 };
 
-static const yytype_int8 yycheck[] =
+static const yytype_int16 yycheck[] =
 {
-       5,     6,     7,     6,     7,     8,    20,    11,     9,    11,
-      24,    11,     9,     9,     9,     9,    -1,    20,    11,    11,
-       9,    24,    27,    28,    29,    30,     9,    -1,    33,    34,
-      35,    36,    37,    38,    39,    40,    -1,    42,     0,     1,
-      -1,     3,     4,     5,    -1,    -1,    -1,     9,    -1,    -1,
-      12,    13,    14,    15,    16,    17,    18,    19,    -1,    21,
-      22,    23,     3,     4,     5,    -1,    -1,    -1,     9,    -1,
-      -1,    -1,    -1,    14,    15,    16,    17,    -1,    -1,    -1,
-      21,    22,    23,     4,     5,     6,     7,     8,     8,    -1,
-      11,     4,     5,     6,     7,     8,    -1,    10,    -1,    20,
-      20,    -1,    -1,    24,    24,    -1,    -1,    20,    -1,    -1,
-      -1,    24,     4,     5,     6,     7,     8,    -1,    10,     4,
-       5,     6,     7,     8,    -1,    10,    -1,    -1,    20,    -1,
-      -1,    -1,    24,    -1,    -1,    20,    -1,    -1,    -1,    24,
+       6,     7,     8,     4,     5,     6,     7,     8,     8,    10,
+       4,     5,     6,     7,     8,     3,    29,    11,     0,    11,
+      33,    11,     9,    11,     9,    11,    10,    10,    29,    29,
+       9,     9,    33,    33,     9,    29,    37,     9,     9,    33,
+      46,    47,    48,    49,    50,    51,    52,    53,    54,    55,
+      56,    57,    58,    37,    37,    61,    62,    63,    64,    65,
+      66,    67,    68,    69,    70,    71,    72,    73,    74,    75,
+      76,     1,    78,     3,     4,     5,     9,     9,     9,     9,
+       9,     9,    12,    13,    14,    15,    16,    17,    18,    19,
+      20,    21,    22,    23,    24,    25,    26,    27,    28,     9,
+      30,    31,    32,    11,    34,    35,    36,     9,    38,    39,
+      40,    41,    42,     4,     5,     6,     7,     8,    11,    10,
+       9,     9,     9,     9,     9,     9,   132,     9,     9,   135,
+       9,   137,   138,   139,   140,     3,     4,     5,    29,     9,
+      -1,     9,    33,    -1,    -1,    -1,    14,    15,    16,    17,
+      18,    19,    20,    21,    22,    23,    24,    25,    26,    -1,
+      -1,    -1,    30,    31,    32,    -1,    34,    35,    36,    -1,
+      38,    39,    40,    41,    42,     4,     5,     6,     7,     8,
+       4,     5,     6,     7,     8,     4,     5,     6,     7,     8,
+       4,     5,     6,     7,     8,    -1,    10,    -1,    -1,    -1,
+      29,    -1,    -1,    -1,    33,    29,    -1,    -1,    37,    33,
+      29,    -1,    -1,    37,    33,    29,    -1,    -1,    37,    33,
        4,     5,     6,     7,     8,    -1,    10,     4,     5,     6,
-       7,     8,    -1,    10,    -1,    -1,    20,    -1,    -1,    -1,
-      24,    -1,    -1,    20,    -1,    -1,    -1,    24,     4,     5,
+       7,     8,    -1,    10,     4,     5,     6,     7,     8,    -1,
+      10,    -1,    -1,    -1,    -1,    29,    -1,    -1,    -1,    33,
+      -1,    -1,    29,    -1,    -1,    -1,    33,    -1,    -1,    29,
+       6,     7,     8,    33,     4,     5,     6,     7,     8,    -1,
+      10,     4,     5,     6,     7,     8,    -1,    10,     4,     5,
+       6,     7,     8,    29,    10,    -1,    -1,    33,    -1,    29,
+      -1,    -1,    -1,    33,    -1,    -1,    29,    -1,    -1,    -1,
+      33,    -1,    -1,    29,    -1,    -1,    -1,    33,     4,     5,
        6,     7,     8,    -1,    10,     4,     5,     6,     7,     8,
-      -1,    10,    -1,    -1,    20,    -1,    -1,    -1,    24,    -1,
-      -1,    20,    -1,    -1,    -1,    24,     4,     5,     6,     7,
-       8,    -1,    10,     4,     5,     6,     7,     8,    -1,    -1,
-      -1,    -1,    20,    -1,    -1,    -1,    24,    -1,    -1,    20,
-      -1,    -1,    -1,    24
+      -1,    10,     4,     5,     6,     7,     8,    -1,    10,    -1,
+      -1,    -1,    -1,    29,    -1,    -1,    -1,    33,    -1,    -1,
+      29,    -1,    -1,    -1,    33,    -1,    -1,    29,    -1,    -1,
+      -1,    33,     4,     5,     6,     7,     8,    -1,    10,     4,
+       5,     6,     7,     8,    -1,    10,     4,     5,     6,     7,
+       8,    -1,    10,    -1,    -1,    -1,    -1,    29,    -1,    -1,
+      -1,    33,    -1,    -1,    29,    -1,    -1,    -1,    33,    -1,
+      -1,    29,    -1,    -1,    -1,    33,     4,     5,     6,     7,
+       8,    -1,    10,     4,     5,     6,     7,     8,    -1,    10,
+       4,     5,     6,     7,     8,    -1,    10,    -1,    -1,    -1,
+      -1,    29,    -1,    -1,    -1,    33,    -1,    -1,    29,    -1,
+      -1,    -1,    33,    -1,    -1,    29,    -1,    -1,    -1,    33,
+       4,     5,     6,     7,     8,    -1,    10,     4,     5,     6,
+       7,     8,    -1,    10,     4,     5,     6,     7,     8,    -1,
+      10,    -1,    -1,    -1,    -1,    29,    -1,    -1,    -1,    33,
+      -1,    -1,    29,    -1,    -1,    -1,    33,    -1,    -1,    29,
+      -1,    -1,    -1,    33,     4,     5,     6,     7,     8,    -1,
+      10,     4,     5,     6,     7,     8,    -1,    10,     4,     5,
+       6,     7,     8,    -1,    10,    -1,    -1,    -1,    -1,    29,
+      -1,    -1,    -1,    33,    -1,    -1,    29,    -1,    -1,    -1,
+      33,    -1,    -1,    29,    -1,    -1,    -1,    33,     4,     5,
+       6,     7,     8,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    29,    -1,    -1,    -1,    33
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    27,     0,     1,     3,     4,     5,     9,    12,    13,
-      14,    15,    16,    17,    18,    19,    21,    22,    23,    28,
-      29,    11,    29,    29,    29,    11,    11,     9,     9,     9,
-       9,    11,    11,     9,     9,     9,     4,     5,     6,     7,
-       8,    11,    20,    24,    10,    29,    29,    29,    29,    29,
-      29,    29,    29,    29,    29,    29,    29,    29,    10,    10,
-      10,    10,    10,    10,    10
+       0,    45,     0,    46,     1,     3,     4,     5,     9,    12,
+      13,    14,    15,    16,    17,    18,    19,    20,    21,    22,
+      23,    24,    25,    26,    27,    28,    30,    31,    32,    34,
+      35,    36,    38,    39,    40,    41,    42,    47,    48,    11,
+      48,    48,    48,    11,     3,    11,     9,     9,     9,     9,
+       9,     9,     9,     9,     9,     9,     9,     9,     9,    11,
+      11,     9,     9,     9,     9,     9,     9,     9,     9,     9,
+       9,     9,     4,     5,     6,     7,     8,    11,    29,    33,
+      10,    11,    48,    48,    48,    48,    48,    48,    48,    48,
+      48,    48,    48,    48,    48,    48,    48,    48,    48,    48,
+      48,    48,    49,    48,    50,    48,    48,    48,    48,    48,
+      48,    48,    48,    48,    10,    10,    10,    10,    10,    10,
+      10,    10,    10,    10,    10,    10,    10,    10,    10,    10,
+      10,    10,    37,    10,    10,    37,    10,    37,    37,    37,
+      37,    48,    48,    48,    48,    48,    48,    10,    10,    10,
+      10
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    26,    27,    27,    28,    28,    28,    28,    28,    28,
-      29,    29,    29,    29,    29,    29,    29,    29,    29,    29,
-      29,    29,    29,    29,    29,    29,    29,    29
+       0,    44,    45,    46,    45,    47,    47,    47,    47,    47,
+      47,    47,    48,    48,    48,    48,    48,    48,    48,    48,
+      48,    48,    48,    48,    48,    48,    48,    48,    48,    48,
+      48,    48,    48,    48,    48,    48,    48,    48,    48,    48,
+      48,    48,    48,    48,    48,    48,    48,    48,    49,    49,
+      50,    50
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     0,     2,     2,     2,     2,     2,     2,     2,
-       1,     3,     3,     3,     3,     3,     3,     2,     2,     3,
-       4,     4,     4,     4,     4,     4,     4,     2
+       0,     2,     0,     0,     3,     2,     2,     2,     3,     2,
+       2,     2,     1,     3,     3,     3,     3,     3,     3,     2,
+       2,     3,     4,     4,     4,     4,     4,     4,     4,     4,
+       4,     4,     4,     4,     4,     4,     4,     4,     2,     4,
+       4,     4,     6,     4,     4,     6,     6,     6,     1,     3,
+       1,     3
 };
 
 
@@ -1153,212 +1281,201 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 4: /* line: expr NEWLINE  */
-#line 76 "calc.y"
-                    {
-    if (!errFlag) {
-        printf("= %g\n> ", (yyvsp[-1].val));
-    }
+  case 3: /* $@1: %empty  */
+#line 96 "calc.y"
+                {
     errFlag = 0;
 }
-#line 1165 "calc.tab.c"
+#line 1290 "calc.tab.c"
     break;
 
-  case 5: /* line: EXITCMD NEWLINE  */
-#line 81 "calc.y"
+  case 5: /* line: expr NEWLINE  */
+#line 100 "calc.y"
+                    {
+    if (!errFlag) {
+        printf("= %g\n", (yyvsp[-1].val));
+    }
+    printf("> ");
+    errFlag = 0;
+}
+#line 1302 "calc.tab.c"
+    break;
+
+  case 6: /* line: EXITCMD NEWLINE  */
+#line 106 "calc.y"
                     {
     printf("Exiting Calculator.\n");
     exit(0);
 }
-#line 1174 "calc.tab.c"
+#line 1311 "calc.tab.c"
     break;
 
-  case 6: /* line: HELPCMD NEWLINE  */
-#line 84 "calc.y"
+  case 7: /* line: HELPCMD NEWLINE  */
+#line 109 "calc.y"
                     {
     printf(
-        "===== HELP =====\n"
-        "This calculator evaluates math expressions entered into the\n"
-        "console.\n\n"
-        "Examples:\n"
-        "\t> 1 + 1\n"
-        "\t> (-5 + 4) - 3\n"
-        "\t> 5 + 4 + 3 + 2 + 1\n"
-        "\t> 6 * (8.4 - 3.5) / 2.3\n"
-        "\t> 3 ^ 10\n"
-        "\t> sin(180)\n"
-        "\t> sqrt(16)\n"
-        "\t> e * pi\n"
-        "\t> round(2.3)\n"
-        "\t> ceil(4.1)\n"
-        "\t> floor(5.9)\n"
-        "\t> 5 %% 2\n"
-        "\t> 10!\n\n"
-        "Supported features:\n"
-        "\t> Brackets: ()\n"
-        "\t> Exponents: ^\n"
-        "\t> Operators: +, -, *, /\n"
-        "\t> Square root: sqrt\n"
-        "\t> Trigonometry: sin, cos, tan\n"
-        "\t> Modulo: %%\n"
-        "\t> Truncation: floor, ceil\n"
-        "\t> Rounding: round\n"
-        "\t> Special constants: e ≈ 2.7183, pi ≈ 3.14159\n"
-        "\t> Factorials: !\n"
-        "\t> Integers and decimals\n"
-        "\t> Positive and negative numbers\n"
-        "Note: Trigonometry functions are available in both radians\n"
-        "and degrees. You can switch to one or the other by simply\n"
-        "typing 'rad' or 'deg', respectively.\n\n"
-        "Common syntax errors:\n"
-        "\t> Unmatched brackets:\t\t5 - (4 - 3\n"
-        "\t> Division by zero:\t\t5 / 0\n"
-        "\t> Negative square roots:\tsqrt(-1)\n"
-        "\t> Incomplete expressions:\t3 + 2 +\n"
-        "\t> Unrecognized characters:\t5 + x\n"
-        "\t> Invalid factorials:\t\t-10.5!\n\n"
-        "Type 'exit' to quit, or 'help' to see this\n"
-        "message again.\n> "
+        "===== HELP MENU =====\n"
+        "1. Basic operators\n"
+        "2. Brackets\n"
+        "3. Exponents\n"
+        "4. Logarithms\n"
+        "5. Roots\n"
+        "6. Min/max\n"
+        "7. Trigonometry\n"
+        "8. Modulo\n"
+        "9. Rounding/truncating\n"
+        "10. Absolute value\n"
+        "11. Random numbers\n"
+        "12. Special constants\n\n"
+        "Type 'help <number> for details on a topic (e.g. 'help 1').\n"
+        "Type 'help' to see this message again, or 'exit' to quit.\n> "
     );
-
 }
-#line 1226 "calc.tab.c"
+#line 1335 "calc.tab.c"
     break;
 
-  case 7: /* line: RAD NEWLINE  */
-#line 130 "calc.y"
+  case 8: /* line: HELPCMD NUM NEWLINE  */
+#line 127 "calc.y"
+                        {
+    if ((yyvsp[-1].val) < 1 || (yyvsp[-1].val) > 12 || (int)(yyvsp[-1].val) != (yyvsp[-1].val)) {
+        yyerror("Help topic not found.");
+    } else {
+        help((int)(yyvsp[-1].val));
+    }
+    printf("> ");
+}
+#line 1348 "calc.tab.c"
+    break;
+
+  case 9: /* line: RAD NEWLINE  */
+#line 134 "calc.y"
                 {
     trigMode = 0;
     printf("Trigonometry mode set to radians.\n> ");
 }
-#line 1235 "calc.tab.c"
+#line 1357 "calc.tab.c"
     break;
 
-  case 8: /* line: DEG NEWLINE  */
-#line 133 "calc.y"
+  case 10: /* line: DEG NEWLINE  */
+#line 137 "calc.y"
                 {
     trigMode = 1;
     printf("Trigonometry mode set to degrees.\n> ");
 }
-#line 1244 "calc.tab.c"
+#line 1366 "calc.tab.c"
     break;
 
-  case 9: /* line: error NEWLINE  */
-#line 136 "calc.y"
+  case 11: /* line: error NEWLINE  */
+#line 140 "calc.y"
                   {
-    errFlag = 1;
     yyerrok;
     printf("> ");
-    errFlag = 0;
 }
-#line 1255 "calc.tab.c"
+#line 1375 "calc.tab.c"
     break;
 
-  case 10: /* expr: NUM  */
-#line 143 "calc.y"
+  case 12: /* expr: NUM  */
+#line 145 "calc.y"
            {
     (yyval.val) = (yyvsp[0].val);
 }
-#line 1263 "calc.tab.c"
+#line 1383 "calc.tab.c"
     break;
 
-  case 11: /* expr: expr PLUS expr  */
-#line 145 "calc.y"
+  case 13: /* expr: expr PLUS expr  */
+#line 147 "calc.y"
                    {
     (yyval.val) = (yyvsp[-2].val) + (yyvsp[0].val);
 }
-#line 1271 "calc.tab.c"
+#line 1391 "calc.tab.c"
     break;
 
-  case 12: /* expr: expr MINUS expr  */
-#line 147 "calc.y"
+  case 14: /* expr: expr MINUS expr  */
+#line 149 "calc.y"
                     {
     (yyval.val) = (yyvsp[-2].val) - (yyvsp[0].val);
 }
-#line 1279 "calc.tab.c"
+#line 1399 "calc.tab.c"
     break;
 
-  case 13: /* expr: expr TIMES expr  */
-#line 149 "calc.y"
+  case 15: /* expr: expr TIMES expr  */
+#line 151 "calc.y"
                     {
     (yyval.val) = (yyvsp[-2].val) * (yyvsp[0].val);
 }
-#line 1287 "calc.tab.c"
+#line 1407 "calc.tab.c"
     break;
 
-  case 14: /* expr: expr DIV expr  */
-#line 151 "calc.y"
+  case 16: /* expr: expr DIV expr  */
+#line 153 "calc.y"
                   {
     if ((yyvsp[0].val) == 0) {
         yyerror("Division by zero");
-        printf("> ");
     } else {
         (yyval.val) = (yyvsp[-2].val) / (yyvsp[0].val);
     }
 }
-#line 1300 "calc.tab.c"
+#line 1419 "calc.tab.c"
     break;
 
-  case 15: /* expr: expr MOD expr  */
-#line 158 "calc.y"
+  case 17: /* expr: expr MOD expr  */
+#line 159 "calc.y"
                   {
     if ((int)(yyvsp[0].val) == 0) {
         yyerror("Modulo by zero");
-        printf("> ");
     } else {
         (yyval.val) = fmod((yyvsp[-2].val), (yyvsp[0].val));
     }
 }
-#line 1313 "calc.tab.c"
+#line 1431 "calc.tab.c"
     break;
 
-  case 16: /* expr: expr EXP expr  */
+  case 18: /* expr: expr EXP expr  */
 #line 165 "calc.y"
                   {
     (yyval.val) = pow((yyvsp[-2].val), (yyvsp[0].val));
 }
-#line 1321 "calc.tab.c"
+#line 1439 "calc.tab.c"
     break;
 
-  case 17: /* expr: MINUS expr  */
+  case 19: /* expr: MINUS expr  */
 #line 167 "calc.y"
                             {
     (yyval.val) = -(yyvsp[0].val);
 }
-#line 1329 "calc.tab.c"
+#line 1447 "calc.tab.c"
     break;
 
-  case 18: /* expr: PLUS expr  */
+  case 20: /* expr: PLUS expr  */
 #line 169 "calc.y"
                            {
     (yyval.val) = (yyvsp[0].val);
 }
-#line 1337 "calc.tab.c"
+#line 1455 "calc.tab.c"
     break;
 
-  case 19: /* expr: LBRACKET expr RBRACKET  */
+  case 21: /* expr: LBRACKET expr RBRACKET  */
 #line 171 "calc.y"
                            {
     (yyval.val) = (yyvsp[-1].val);
 }
-#line 1345 "calc.tab.c"
+#line 1463 "calc.tab.c"
     break;
 
-  case 20: /* expr: SQRT LBRACKET expr RBRACKET  */
+  case 22: /* expr: SQRT LBRACKET expr RBRACKET  */
 #line 173 "calc.y"
                                 {
     if ((yyvsp[-1].val) < 0) {
         yyerror("Negative square roots are not supported.");
-        printf("> ");
     } else {
         (yyval.val) = sqrt((yyvsp[-1].val));
     }
 }
-#line 1358 "calc.tab.c"
+#line 1475 "calc.tab.c"
     break;
 
-  case 21: /* expr: SIN LBRACKET expr RBRACKET  */
-#line 180 "calc.y"
+  case 23: /* expr: SIN LBRACKET expr RBRACKET  */
+#line 179 "calc.y"
                                {
     if (trigMode) {
         (yyval.val) = sin((yyvsp[-1].val) * M_PI / 180);
@@ -1366,11 +1483,11 @@ yyreduce:
         (yyval.val) = sin((yyvsp[-1].val));
     }
 }
-#line 1370 "calc.tab.c"
+#line 1487 "calc.tab.c"
     break;
 
-  case 22: /* expr: COS LBRACKET expr RBRACKET  */
-#line 186 "calc.y"
+  case 24: /* expr: COS LBRACKET expr RBRACKET  */
+#line 185 "calc.y"
                                {
     if (trigMode) {
         (yyval.val) = cos((yyvsp[-1].val) * M_PI / 180);
@@ -1378,11 +1495,11 @@ yyreduce:
         (yyval.val) = cos((yyvsp[-1].val));
     }
 }
-#line 1382 "calc.tab.c"
+#line 1499 "calc.tab.c"
     break;
 
-  case 23: /* expr: TAN LBRACKET expr RBRACKET  */
-#line 192 "calc.y"
+  case 25: /* expr: TAN LBRACKET expr RBRACKET  */
+#line 191 "calc.y"
                                {
     if (trigMode) {
         (yyval.val) = tan((yyvsp[-1].val) * M_PI / 180);
@@ -1390,42 +1507,147 @@ yyreduce:
         (yyval.val) = tan((yyvsp[-1].val));
     }
 }
-#line 1394 "calc.tab.c"
+#line 1511 "calc.tab.c"
     break;
 
-  case 24: /* expr: ROUND LBRACKET expr RBRACKET  */
-#line 198 "calc.y"
+  case 26: /* expr: SEC LBRACKET expr RBRACKET  */
+#line 197 "calc.y"
+                               {
+    double angle = trigMode ? (yyvsp[-1].val) * M_PI / 180 : (yyvsp[-1].val);
+    if (cos(angle) == 0) {
+        yyerror("sec(x) undefined (cos(x)=0)");
+    } else {
+        (yyval.val) = 1 / cos(angle);
+    }
+}
+#line 1524 "calc.tab.c"
+    break;
+
+  case 27: /* expr: CSC LBRACKET expr RBRACKET  */
+#line 204 "calc.y"
+                               {
+    double angle = trigMode ? (yyvsp[-1].val) * M_PI / 180 : (yyvsp[-1].val);
+    if (sin(angle) == 0) {
+        yyerror("csc(x) undefined (sin(x)=0)");
+    } else {
+        (yyval.val) = 1 / sin(angle);
+    }
+}
+#line 1537 "calc.tab.c"
+    break;
+
+  case 28: /* expr: COT LBRACKET expr RBRACKET  */
+#line 211 "calc.y"
+                               {
+    double angle = trigMode ? (yyvsp[-1].val) * M_PI / 180 : (yyvsp[-1].val);
+    if (tan(angle) == 0) {
+        yyerror("cot(x) undefined (tan(x)=0)");
+    } else {
+        (yyval.val) = 1 / tan(angle);
+    }
+}
+#line 1550 "calc.tab.c"
+    break;
+
+  case 29: /* expr: ASIN LBRACKET expr RBRACKET  */
+#line 218 "calc.y"
+                                {
+    if ((yyvsp[-1].val) < -1 || (yyvsp[-1].val) > 1) {
+        yyerror("asin(x) domain error");
+    } else {
+        (yyval.val) = trigMode ? asin((yyvsp[-1].val)) * 180 / M_PI : asin((yyvsp[-1].val));
+    }
+}
+#line 1562 "calc.tab.c"
+    break;
+
+  case 30: /* expr: ACOS LBRACKET expr RBRACKET  */
+#line 224 "calc.y"
+                                {
+    if ((yyvsp[-1].val) < -1 || (yyvsp[-1].val) > 1) {
+        yyerror("acos(x) domain error");
+    } else {
+        (yyval.val) = trigMode ? acos((yyvsp[-1].val)) * 180 / M_PI : acos((yyvsp[-1].val));
+    }
+}
+#line 1574 "calc.tab.c"
+    break;
+
+  case 31: /* expr: ATAN LBRACKET expr RBRACKET  */
+#line 230 "calc.y"
+                                {
+    (yyval.val) = trigMode ? atan((yyvsp[-1].val)) * 180 / M_PI : atan((yyvsp[-1].val));
+}
+#line 1582 "calc.tab.c"
+    break;
+
+  case 32: /* expr: ASEC LBRACKET expr RBRACKET  */
+#line 232 "calc.y"
+                                {
+    if (fabs((yyvsp[-1].val)) < 1) {
+        yyerror("asec(x) domain error (|x|>=1 required)");
+    } else {
+        (yyval.val) = trigMode ? acos(1 / (yyvsp[-1].val)) * 180 / M_PI : acos(1 / (yyvsp[-1].val));
+    }
+}
+#line 1594 "calc.tab.c"
+    break;
+
+  case 33: /* expr: ACSC LBRACKET expr RBRACKET  */
+#line 238 "calc.y"
+                                {
+    if (fabs((yyvsp[-1].val)) < 1) {
+        yyerror("acsc(x) domain error (|x|>=1 required)");
+    } else {
+        (yyval.val) = trigMode ? asin(1 / (yyvsp[-1].val)) * 180 / M_PI : asin(1 / (yyvsp[-1].val));
+    }
+}
+#line 1606 "calc.tab.c"
+    break;
+
+  case 34: /* expr: ACOT LBRACKET expr RBRACKET  */
+#line 244 "calc.y"
+                                {
+    if ((yyvsp[-1].val) == 0) {
+        yyerror("acot(x) undefined for x=0");
+    } else {
+        (yyval.val) = trigMode ? atan(1 / (yyvsp[-1].val)) * 180 / M_PI : atan(1 / (yyvsp[-1].val));
+    }
+}
+#line 1618 "calc.tab.c"
+    break;
+
+  case 35: /* expr: ROUND LBRACKET expr RBRACKET  */
+#line 250 "calc.y"
                                  {
     (yyval.val) = round((yyvsp[-1].val));
 }
-#line 1402 "calc.tab.c"
+#line 1626 "calc.tab.c"
     break;
 
-  case 25: /* expr: FLOOR LBRACKET expr RBRACKET  */
-#line 200 "calc.y"
+  case 36: /* expr: FLOOR LBRACKET expr RBRACKET  */
+#line 252 "calc.y"
                                  {
     (yyval.val) = floor((yyvsp[-1].val));
 }
-#line 1410 "calc.tab.c"
+#line 1634 "calc.tab.c"
     break;
 
-  case 26: /* expr: CEIL LBRACKET expr RBRACKET  */
-#line 202 "calc.y"
+  case 37: /* expr: CEIL LBRACKET expr RBRACKET  */
+#line 254 "calc.y"
                                 {
     (yyval.val) = ceil((yyvsp[-1].val));
 }
-#line 1418 "calc.tab.c"
+#line 1642 "calc.tab.c"
     break;
 
-  case 27: /* expr: expr FACT  */
-#line 204 "calc.y"
+  case 38: /* expr: expr FACT  */
+#line 256 "calc.y"
               {
     if ((yyvsp[-1].val) < 0) {
         yyerror("Negative factorials are not supported.");
-        printf("> ");
     } else if (round((yyvsp[-1].val)) != (yyvsp[-1].val)) {
         yyerror("Factorials of decimals are not supported.");
-        printf("> ");
     } else {
         double result = 1;
         for (int i = 1; i <= (int)(yyvsp[-1].val); i++) {
@@ -1434,11 +1656,150 @@ yyreduce:
         (yyval.val) = result;
     }
 }
-#line 1438 "calc.tab.c"
+#line 1660 "calc.tab.c"
+    break;
+
+  case 39: /* expr: ABS LBRACKET expr RBRACKET  */
+#line 268 "calc.y"
+                               {
+    if ((yyvsp[-1].val) < 0) {
+        (yyval.val) = -(yyvsp[-1].val);
+    } else {
+        (yyval.val) = (yyvsp[-1].val);
+    }
+}
+#line 1672 "calc.tab.c"
+    break;
+
+  case 40: /* expr: LN LBRACKET expr RBRACKET  */
+#line 274 "calc.y"
+                              {
+    if ((yyvsp[-1].val) <= 0) {
+        yyerror("Domain error - natural log input must be greater than 0.");
+    } else {
+        (yyval.val) = log((yyvsp[-1].val));
+    }
+}
+#line 1684 "calc.tab.c"
+    break;
+
+  case 41: /* expr: LOG LBRACKET expr RBRACKET  */
+#line 280 "calc.y"
+                               {
+    if ((yyvsp[-1].val) <= 0) {
+        yyerror("Domain error - log input must be greater than 0.");
+    } else {
+        (yyval.val) = log10((yyvsp[-1].val));
+    }
+}
+#line 1696 "calc.tab.c"
+    break;
+
+  case 42: /* expr: LOG LBRACKET expr COMMA expr RBRACKET  */
+#line 286 "calc.y"
+                                          {
+    if ((yyvsp[-3].val) <= 0 || (yyvsp[-1].val) <= 0 || (yyvsp[-3].val) == 1) {
+        yyerror("Invalid base or argument for log(b, x). Base must be greater than 0 and not 1; x must be greater than 0.");
+    } else {
+        (yyval.val) = log((yyvsp[-1].val)) / log((yyvsp[-3].val));
+    }
+}
+#line 1708 "calc.tab.c"
+    break;
+
+  case 43: /* expr: MIN LBRACKET minlist RBRACKET  */
+#line 292 "calc.y"
+                                  {
+    (yyval.val) = (yyvsp[-1].val);
+}
+#line 1716 "calc.tab.c"
+    break;
+
+  case 44: /* expr: MAX LBRACKET maxlist RBRACKET  */
+#line 294 "calc.y"
+                                  {
+    (yyval.val) = (yyvsp[-1].val);
+}
+#line 1724 "calc.tab.c"
+    break;
+
+  case 45: /* expr: RAND LBRACKET expr COMMA expr RBRACKET  */
+#line 296 "calc.y"
+                                           {
+    if ((yyvsp[-3].val) > (yyvsp[-1].val)) {
+        yyerror("The first argument of rand() must be less than or equal to the second argument.");
+    } else {
+        double scale = (double)rand() / RAND_MAX;
+        (yyval.val) = (yyvsp[-3].val) + scale * ((yyvsp[-1].val) - (yyvsp[-3].val));
+    }
+}
+#line 1737 "calc.tab.c"
+    break;
+
+  case 46: /* expr: RANDINT LBRACKET expr COMMA expr RBRACKET  */
+#line 303 "calc.y"
+                                              {
+    if (round((yyvsp[-3].val)) != (yyvsp[-3].val) || round((yyvsp[-1].val)) != (yyvsp[-1].val)) {
+        yyerror("Both arguments of randint() must be integers.");
+    } else if ((yyvsp[-3].val) > (yyvsp[-1].val)) {
+        yyerror("The first argument of randint() must be less than or equal to the second argument.");
+    } else {
+        int l = (int)(yyvsp[-3].val);
+        int h = (int)(yyvsp[-1].val);
+        (yyval.val) = (rand() % (h - l + 1)) + l;
+    }
+}
+#line 1753 "calc.tab.c"
+    break;
+
+  case 47: /* expr: ROOT LBRACKET expr COMMA expr RBRACKET  */
+#line 313 "calc.y"
+                                           {
+    if ((yyvsp[-1].val) == 0) {
+        yyerror("Root of 0 is undefined.");
+    } else if ((yyvsp[-3].val) < 0 && fmod((yyvsp[-1].val), 2.0) != 1.0) {
+        yyerror("Even roots of negative numbers are not supported.");
+    } else {
+        (yyval.val) = pow((yyvsp[-3].val), 1.0 / (yyvsp[-1].val));
+    }
+}
+#line 1767 "calc.tab.c"
+    break;
+
+  case 48: /* minlist: expr  */
+#line 323 "calc.y"
+               {
+    (yyval.val) = (yyvsp[0].val);
+}
+#line 1775 "calc.tab.c"
+    break;
+
+  case 49: /* minlist: minlist COMMA expr  */
+#line 325 "calc.y"
+                       {
+    (yyval.val) = ((yyvsp[-2].val) < (yyvsp[0].val)) ? (yyvsp[-2].val) : (yyvsp[0].val);
+}
+#line 1783 "calc.tab.c"
+    break;
+
+  case 50: /* maxlist: expr  */
+#line 329 "calc.y"
+               {
+    (yyval.val) = (yyvsp[0].val);
+}
+#line 1791 "calc.tab.c"
+    break;
+
+  case 51: /* maxlist: maxlist COMMA expr  */
+#line 331 "calc.y"
+                       {
+    (yyval.val) = ((yyvsp[-2].val) > (yyvsp[0].val)) ? (yyvsp[-2].val) : (yyvsp[0].val);
+}
+#line 1799 "calc.tab.c"
     break;
 
 
-#line 1442 "calc.tab.c"
+#line 1803 "calc.tab.c"
 
       default: break;
     }
@@ -1631,7 +1992,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 219 "calc.y"
+#line 334 "calc.y"
 
 
 int yywrap() {
@@ -1644,8 +2005,197 @@ int yywrap() {
 * @param s: the error message
 */
 void yyerror(const char* s) {
-    errFlag = 1;
-    fprintf(stderr, "ERROR: %s\n", s);
+    if (!errFlag) {
+        fprintf(stderr, "ERROR: %s\n", s);
+        errFlag = 1;
+    }
+}
+
+/**
+ * Displays a help menu topic based on what the user inputs.
+ *
+ * @param n: the number corresponding to the desired help topic
+ */
+void help(int n) {
+    switch(n) {
+        case 1:
+            printf(
+                "===== BASIC OPERATORS =====\n"
+                "Use +, -, *, and / for arithmetic.\n"
+                "    > Example: 3 + 4 * 2\n"
+                "Operators MUST have expressions on both sides.\n"
+                "    > '2 + 3 +' -> syntax error\n"
+            );
+            break;
+        case 2:
+            printf(
+                "===== BRACKETS =====\n"
+                "Use brackets () to control the order of operations.\n"
+                "    > Example: (3 + 4) * 2\n"
+                "Brackets must match.\n"
+                "    > '(3 + 2' -> syntax error\n"
+            );
+            break;
+        case 3:
+            printf(
+                "===== EXPONENTS ===== \n"
+                "Use exponents to multiply a number times itself a\n"
+                "specified number of times.\n"
+                "    > Example: 3 ^ 10\n"
+                "Exponents MUST have expressions on both sides.\n"
+                "    > '2 ^' -> syntax error\n"
+            );
+            break;
+        case 4:
+            printf(
+                "===== LOGARITHMS =====\n"
+                "Use logarithms to calculate the exponent need to reach\n"
+                "a number from its base.\n"
+                "1. Natural logarithm (base e): ln(x)\n"
+                "    > Example: ln(2.71821) ≈ 1\n"
+                "    > Note: x must be greater than 0.\n"
+                "2. Common logarithm (base 10): log(x)\n"
+                "    > Example: log(100) = 2\n"
+                "    > Note: x must be greater than 0.\n"
+                "3. Logarithm with custom base: log(b, x)\n"
+                "    > Example: log(2, 8) = 3\n"
+                "    > Note: Base b must be greater than 0 and not 1. x\n"
+                "      must be greater than 0.\n"
+                "Syntax errors will occur if the arguments are invalid.\n"
+                "Use brackets around the arguments: log(2, 8)\n"
+            );
+            break;
+        case 5:
+            printf(
+                "===== ROOTS =====\n"
+                "Roots are used to calculate a number that, when raised\n"
+                "to a certain power, equals the original number.\n\n"
+                "Available functions:\n"
+                "    > sqrt(x): calculates the square root of x.\n"
+                "        > Example: sqrt(16) = 4\n"
+                "    > root(x, n)L calculates the nth root of x,\n"
+                "        > Example: root(27, 3) = 3\n\n"
+                "Notes:\n"
+                "    > The second argument of root(x, n) must not be 0.\n"
+                "    > Even roots of negative numbers are not supported.\n"
+                "        > 'root(-8, 2)' -> syntax error\n"
+                "    > Odd roots of negative numbers are allowed.\n"
+                "        > Example: root(-8, 3) = -2\n"
+                "    > Use brackets around arguments: sqrt(16)\n"
+            );
+            break;
+        case 6:
+            printf(
+                "===== MIN/MAX =====\n"
+                "The min function calculates the minimum number in a\n"
+                "provided list of numbers.\n"
+                "    > Example: min(2, 5, 1, 7) = 1\n"
+                "Similarly, the max function calculates the maximum\n"
+                "number in a provided list of numbers.\n"
+                "    > Example: max(2, 5, 1, 7) = 7\n"
+                "Number list must be comma-separated.\n"
+                "    > 'max(2 8)' -> syntax error\n"
+                "Use brackets around the arguments: max(2, 8)\n"
+            );
+            break;
+        case 7:
+            printf(
+                "===== TRIGONOMETRY =====\n"
+                "Trigonometric functions relate angles to ratios of\n"
+                "sides in a right triangle.\n\n"
+                "Available functions:\n"
+                "    > sin(x), cos(x), tan(x)\n"
+                "    > sec(x) = 1/cos(x), csc(x) = 1/sin(x), cot(x) = 1/tan(x)\n"
+                "    > Inverse functions: asin(x), acos(x), atan(x)\n"
+                "    > Inverse sec/csc/cot: asec(x), acsc(x), acot(x)\n\n"
+                "Examples:\n"
+                "    > sin(0) = 0, cos(0) = 1, tan(0) = 0\n"
+                "    > sec(0) = 1, csc(pi/2) = 1, cot(pi/4) = 1\n"
+                "    > asin(1) = pi/2, acos(0) = pi/2\n\n"
+                "By default, all angles are in radians. You can toggle modes:\n"
+                "    > Type 'rad' to use radians\n"
+                "    > Type 'deg' to use degrees\n"
+                "Example using degrees: deg 90 -> sin(90) = 1\n\n"
+                "Notes:\n"
+                "    > Functions automatically convert degrees to radians if 'deg' mode is active.\n"
+                "    > Use brackets around the arguments: sin(90), asec(2)\n"
+            );
+            break;
+        case 8:
+            printf(
+                "===== Modulo =====\n"
+                "Return the number remaining from a division.\n"
+                "    > Example: 5 % 2 = 1\n"
+                "Modulos MUST have expressions on both sides.\n"
+                "    > '5 %' -> syntax error\n"
+            );
+            break;
+        case 9:
+            printf(
+                "===== ROUNDING/TRUNCATING =====\n"
+                "These functions allow you to adjust numbers to their\n"
+                "nearest integer or limit their decimal portion.\n\n"
+                "Available functions:\n"
+                "    > round(x): rounds x to the nearest integer.\n"
+                "        > Example: round(2.3) = 2\n"
+                "    > ceil(x): adjusts x to the next integer up.\n"
+                "        > Example: ceil(2.3) = 3\n"
+                "    > floor(x): adjusts x to the next integer down.\n"
+                "        > Example: floor(2.7) = 2\n\n"
+                "Notes:\n"
+                "    > These functions only affect the numeric value of x;\n"
+                "      they do not change the type of the result.\n"
+                "    > Use them to simplify numbers or control precision\n"
+                "      in calculations.\n"
+                "    > Use brackets around arguments: floor(2.7)\n"
+            );
+            break;
+        case 10:
+            printf(
+                "===== ABSOLUTE VALUE =====\n"
+                "Returns the distance from 0 of an expression.\n"
+                "    > Example: abs(-5) = 5\n"
+            );
+            break;
+        case 11:
+            printf(
+                "===== RANDOM NUMBERS =====\n"
+                "These functions generate random numbers within a\n"
+                "specified range.\n\n"
+                "Available functions:\n"
+                "    > rand(x, y): returns a random decimal number between\n"
+                "      x and y (inclusive).\n"
+                "        > Example: rand(1, 5) might return 3.472\n"
+                "    > randint(x, y): returns a random integer between x\n"
+                "      and y\n"
+                "        > Example: randint(1, 5) might return 2\n\n"
+                "Notes:\n"
+                "    > For randint(), both arguments must be integers.\n"
+                "        > 'randint(2.2, 5.5)' -> syntax error\n"
+                "    > The first argument for both functions must be less\n"
+                "      than or equal to the second argument.\n"
+                "        > 'rand(5, 2)' -> syntax error\n"
+            );
+            break;
+        default:
+            printf(
+                "===== SPECIAL CONSTANTS =====\n"
+                "Special constants are available in this calculator:\n"
+                "    > pi ≈ 3.14159\n"
+                "        > Represents the ratio of a circle's circumference\n"
+                "          to its diameter.\n"
+                "    > e ≈ 2.71828\n"
+                "        > Represents Euler's constant, the base of natural\n"
+                "          logarithms,\n\n"
+                "Notes:\n"
+                "    > Use these constants just like regular numbers in\n"
+                "      your expressions.\n"
+                "    > They can be combined with operators, functions, and\n"
+                "      other numbers.\n"
+                "        > Example: sin(pi / 2) = 1\n"
+            );
+            break;
+    }
 }
 
 /**
@@ -1653,6 +2203,8 @@ void yyerror(const char* s) {
 * input until the user exits the program.
 */
 int main(int argc, char** argv) {
+    srand(time(NULL));
+
     printf(
         "Welcome to Calculator.\n"
         "Enter equations into the console, and the evaluation will be\n"
