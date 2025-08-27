@@ -5,7 +5,7 @@
  *
  * @file: calc.l
  * @author: Josh Nygaard (joshdn03@gmail.com)
- * @version: 1.0
+ * @version: 1.1
  */
 
 %{
@@ -75,6 +75,33 @@
 "tan" {
     return TAN;
 }
+"csc" {
+    return CSC;
+}
+"sec" {
+    return SEC;
+}
+"cot" {
+    return COT;
+}
+"asin" {
+    return ASIN;
+}
+"acos" {
+    return ACOS;
+}
+"atan" {
+    return ATAN;
+}
+"asec" {
+    return ASEC;
+}
+"acsc" {
+    return ACSC;
+}
+"acot" {
+    return ACOT;
+}
 "e" {
     yylval.val = M_E;
     return NUM;
@@ -98,9 +125,40 @@
 "!" {
     return FACT;
 }
-
+"abs" {
+    return ABS;
+}
+"log" {
+    return LOG;
+}
+"ln" {
+    return LN;
+}
+"," {
+    return COMMA;
+}
+"min" {
+    return MIN;
+}
+"max" {
+    return MAX;
+}
+"rand" {
+    return RAND;
+}
+"randint" {
+    return RANDINT;
+}
+"root" {
+    return ROOT;
+}
 
 . {
-    printf("SYNTAX ERROR: Unexpected \"%s\" found\n", yytext);
+    extern int errFlag;
+    if (!errFlag) {
+        char buf[80];
+        snprintf(buf, sizeof(buf), "SYNTAX ERROR: Unexpected \"%s\" found", yytext);
+        yyerror(buf);
+    }
 }
 %%
