@@ -16,9 +16,8 @@
 %}
 
 %%
-[ \t\r] {
-    ;
-}
+[ \t\r] { ; }
+
 [0-9]+\.[0-9]+ {
     yylval.val = atof(yytext);
     return NUM;
@@ -27,81 +26,34 @@
     yylval.val = atof(yytext);
     return NUM;
 }
-"+" {
-    return PLUS;
-}
-"-" {
-    return MINUS;
-}
-"*" {
-    return TIMES;
-}
-"/" {
-    return DIV;
-}
-"^" {
-    return EXP;
-}
-"(" {
-    return LBRACKET;
-}
-")" {
-    return RBRACKET;
-}
-"\n" {
-    return NEWLINE;
-}
-"help" {
-    return HELPCMD;
-}
-"exit" {
-    return EXITCMD;
-}
-"rad" {
-    return RAD;
-}
-"deg" {
-    return DEG;
-}
-"sqrt" {
-    return SQRT;
-}
-"sin" {
-    return SIN;
-}
-"cos" {
-    return COS;
-}
-"tan" {
-    return TAN;
-}
-"csc" {
-    return CSC;
-}
-"sec" {
-    return SEC;
-}
-"cot" {
-    return COT;
-}
-"asin" {
-    return ASIN;
-}
-"acos" {
-    return ACOS;
-}
-"atan" {
-    return ATAN;
-}
-"asec" {
-    return ASEC;
-}
-"acsc" {
-    return ACSC;
-}
-"acot" {
-    return ACOT;
-}
+"\n" { return NEWLINE; }
+
+"help" { return HELPCMD; }
+"exit" { return EXITCMD; }
+
+"+"     { return PLUS; }
+"-"     { return MINUS; }
+"*"     { return TIMES; }
+"/"     { return DIV; }
+"^"     { return EXP; }
+"("     { return LBRACKET; }
+")"     { return RBRACKET; }
+
+"rad"   { return RAD; }
+"deg"   { return DEG; }
+"sin"   { return SIN; }
+"cos"   { return COS; }
+"tan"   { return TAN; }
+"csc"   { return CSC; }
+"sec"   { return SEC; }
+"cot"   { return COT; }
+"asin"  { return ASIN; }
+"acos"  { return ACOS; }
+"atan"  { return ATAN; }
+"asec"  { return ASEC; }
+"acsc"  { return ACSC; }
+"acot"  { return ACOT; }
+
 "e" {
     yylval.val = M_E;
     return NUM;
@@ -110,48 +62,22 @@
     yylval.val = M_PI;
     return NUM;
 }
-"%" {
-    return MOD;
-}
-"round" {
-    return ROUND;
-}
-"floor" {
-    return FLOOR;
-}
-"ceil" {
-    return CEIL;
-}
-"!" {
-    return FACT;
-}
-"abs" {
-    return ABS;
-}
-"log" {
-    return LOG;
-}
-"ln" {
-    return LN;
-}
-"," {
-    return COMMA;
-}
-"min" {
-    return MIN;
-}
-"max" {
-    return MAX;
-}
-"rand" {
-    return RAND;
-}
-"randint" {
-    return RANDINT;
-}
-"root" {
-    return ROOT;
-}
+
+"%"         { return MOD; }
+"round"     { return ROUND; }
+"floor"     { return FLOOR; }
+"ceil"      { return CEIL; }
+"!"         { return FACT; }
+"abs"       { return ABS; }
+"log"       { return LOG; }
+"ln"        { return LN; }
+","         { return COMMA; }
+"min"       { return MIN; }
+"max"       { return MAX; }
+"rand"      { return RAND; }
+"randint"   { return RANDINT; }
+"sqrt"      { return SQRT; }
+"root"      { return ROOT; }
 
 . {
     extern int errFlag;
