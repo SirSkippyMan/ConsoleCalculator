@@ -10,7 +10,7 @@ A powerful **console-based calculator** that evaluates complex mathematical expr
 
 * Addition (`+`), Subtraction (`-`), Multiplication (`*`), Division (`/`)
 * Exponents (`^`) and Brackets (`()`)
-* Modulo: `mod` (`%%`)
+* Modulo: `mod` (`%`)
 
 ### Special Functions
 
@@ -61,7 +61,7 @@ A powerful **console-based calculator** that evaluates complex mathematical expr
 2. **Run the calculator**:
 
    ```bash
-   ./calculator
+   ./calc
    ```
 
 3. **Enter expressions**:
@@ -114,7 +114,7 @@ A powerful **console-based calculator** that evaluates complex mathematical expr
 > round(2.3)
 > ceil(4.1)
 > floor(5.9)
-> 5 %% 2
+> 5 % 2
 > 10!
 > log(100)
 > log(2, 8)
