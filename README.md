@@ -147,7 +147,7 @@ All errors are reported immediately, and invalid expressions are ignored.
 
 ## Author
 
-**Josh Nygaard**
+**Josh Nygaard**  
 [joshdn03@gmail.com](mailto:joshdn03@gmail.com)
 
 Version: 1.1
